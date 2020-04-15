@@ -64,7 +64,8 @@ public class CreateOrderThread extends Thread{
 			}
 
       //Check if the Order entered and present
-      if (SalesSystem.orders.get(orderDate) != null) {
+      Object ob = SalesSystem.orders.get(orderDate);
+      if (ob != null) {
         System.out.println("New order verified to be present in hashmap: " + SalesSystem.orders.get(orderDate));
       }
 			id++;
