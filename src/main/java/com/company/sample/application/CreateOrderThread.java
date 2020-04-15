@@ -28,6 +28,7 @@ public class CreateOrderThread extends Thread{
     private volatile boolean exit = false;
 
     private static Random random = new Random();
+    
 
     public void run() {
         while (!exit) {
@@ -44,9 +45,9 @@ public class CreateOrderThread extends Thread{
      */
     public void createOrder(String productName){
         try {
-            Date orderDate = null;
+        	Date orderDate = Util.getRandomDate();
             if(orderDate != null) {
-              orderDate = Util.getRandomDate();
+              orderDate = null;
             }
             Optional<ProductName> optional = ProductName.getProductName(productName);
 
