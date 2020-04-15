@@ -44,7 +44,10 @@ public class CreateOrderThread extends Thread{
      */
     public void createOrder(String productName){
         try {
-            Date orderDate = Util.getRandomDate();
+            Date orderDate = null;
+            if(orderDate == null) {
+              orderDate = Util.getRandomDate();
+            }
             Optional<ProductName> optional = ProductName.getProductName(productName);
 
             if (!optional.isPresent()) {
