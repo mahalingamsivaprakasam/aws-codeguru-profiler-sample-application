@@ -38,7 +38,7 @@ public class OrderConfirmationThread {
 			if (TableStatus.ACTIVE.toString().equals(tblStatus)) {
 				return result.getTable();
 			}
-			TimeUnit.SECONDS.sleep(5);
+			Thread.sleep(5 * 1000);
 		}
 		return null;
 	}
