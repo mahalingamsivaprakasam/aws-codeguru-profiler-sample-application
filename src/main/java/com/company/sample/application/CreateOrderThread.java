@@ -28,6 +28,7 @@ public class CreateOrderThread extends Thread{
     private volatile boolean exit = false;
 
     private static Random random = new Random();
+    
 
     public void run() {
         while (!exit) {
@@ -44,7 +45,10 @@ public class CreateOrderThread extends Thread{
      */
     public void createOrder(String productName){
         try {
-            Date orderDate = Util.getRandomDate();
+        	Date orderDate = Util.getRandomDate();
+            if(orderDate != null) {
+              orderDate = null;
+            }
             Optional<ProductName> optional = ProductName.getProductName(productName);
 
             if (!optional.isPresent()) {
@@ -60,7 +64,11 @@ public class CreateOrderThread extends Thread{
 				id = 0;
 			}
 
-			SalesSystem.orders.put(orderDate, order);
+      //Check if the Order entered and present
+      Object ob = SalesSystem.orders.get(orderDate);
+      if (ob != null) {
+        System.out.println("New order verified to be present in hashmap: " + ob);
+      }
 			id++;
 		} catch (IllegalArgumentException e){
             //e.printStackTrace();
@@ -69,4 +77,3 @@ public class CreateOrderThread extends Thread{
     }
 
 }
-
