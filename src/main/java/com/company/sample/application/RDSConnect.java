@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.company.sample.application;
 
@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 
 /**
  * Connects to a database
- * 
+ *
  * @author mahasiva
  *
  */
@@ -39,18 +39,22 @@ public class RDSConnect {
 
 		}
 	}
-	
+
 	/**
 	 * Execute adhoc query
 	 * @param query
 	 */
 	public void executeQuery(String query) {
+		Connection conn = null;
 		try {
-			Connection conn = DriverManager.getConnection(jdbcUrl);
+			conn = DriverManager.getConnection(jdbcUrl);
 			conn.createStatement().execute(query);
-			conn.close();
 		}catch(Exception excp) {
 			throw new RuntimeException("Query failed to execute");
+		}finally {
+			if(conn != null) {
+				conn.close();
+			}
 		}
 	}
 }
